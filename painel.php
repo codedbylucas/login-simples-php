@@ -12,7 +12,6 @@ include('protect.php')
     <title>Painel</title>
 </head>
 <body>
-    <!--Quando o usuario estiver logado será encaminhado para essa pagina-->
      Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>      
 
      <p>

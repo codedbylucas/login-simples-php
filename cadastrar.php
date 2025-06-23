@@ -59,7 +59,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
 <body>
     <div class="index">
         <form action="" method="POST">
-            <h1 class="cadastro" style="color:aliceblue">Login</h1>
+            <h1 class="cadastro" style="color:aliceblue">Cadastrar-se</h1>
             <div class="cadastro">
                 <div class="content">
                     <label>E-mail</label>
@@ -68,13 +68,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
                     <label>Senha</label>
                     <input type="password" placeholder="Senha" name="senha">
 
-                    <button type="submit">Acessar</button>
-
-                    <label for="">
-                        Não tem login?
-                        <a href="cadastrar.php" style="text-decoration: none;">Cadastre-se</a>
-
-                    </label>
+                    <button type="submit">Cadastrar</button>
                 </div>
             </div>
         </form>
