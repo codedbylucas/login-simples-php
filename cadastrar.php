@@ -1,48 +1,43 @@
 <?php
 include('./config/conexao.php');
+$pdo = Conexao::conectar();
 
-//Função para verificar se existe a variavel e-mail e senha.
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email']);
+    $senha = $_POST['senha'];
 
-//isset = se existir e-mail ou existir senha                                        
-if (isset($_POST['email']) || isset($_POST['senha'])) {
-    // strlen = quantidade de caracteres 
-    if (strlen($_POST['email']) == 0) {
-        echo 'Preencha seu e-mail';
-    } else if (strlen($_POST['senha']) == 0) {
-        echo 'Preencha sua senha';
+    if (empty($email) || empty($senha)) {
+        echo 'Preencha todos os campos';
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo 'E-mail inválido';
+        exit;
+    }
+
+    $sqlValidacao = 'SELECT * FROM usuarios WHERE email = :email';
+    $stmt = $pdo->prepare($sqlValidacao);
+    $stmt->bindValue(':email', $email);
+    $stmt->execute();
+
+    if ($stmt->rowCount()) {
+        echo 'Já tem um email desse cadastrado';
+        exit;
+    }
+
+    $hash = password_hash($senha, PASSWORD_DEFAULT);
+    $sqlCadastro = 'INSERT INTO usuarios (email, senha) VALUES (:email, :senha)';
+    $stmtCadastro = $pdo->prepare($sqlCadastro);
+    $stmtCadastro->bindValue(':email', $email);
+    $stmtCadastro->bindValue(':senha', $hash);
+
+    if ($stmtCadastro->execute()) {
+        echo 'Usuário cadastrado com sucesso';
     } else {
-        $email = $mysqli->real_escape_string($_POST['email']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
-
-        //Puxando todos os campos da tabela usuario 
-        $sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
-        $sql_query = $mysqli->query($sql) or die("Falha na execução do código SQL: " . $mysqli->error);
-
-        //Verifica a quantidade de registros que a consulta acima retornou para saber se o usuario existe
-        $quantidade = $sql_query->num_rows;
-
-        if ($quantidade == 1) {
-
-            //incluindo os dados retornados dentro da variavel usuario
-            $usuario = $sql_query->fetch_assoc();
-
-            //Se não exister sessão
-            if (!isset($_SESSION)) {
-                //Começar nova sessão
-                session_start();
-            }
-
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome'];
-
-            //Redirecionar usuario para painel.php
-            header("Location: painel.php");
-        } else {
-            echo "Falha ao logar! E-mail ou Senha incorretos";
-        }
+        echo 'Erro ao cadastrar usuário';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -69,10 +64,14 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
                     <input type="password" placeholder="Senha" name="senha">
 
                     <button type="submit">Cadastrar</button>
+                    <a href="index.php" style="text-decoration: none;">Voltar</a>
                 </div>
             </div>
         </form>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="validarForms.js"></script>
 
 </html>

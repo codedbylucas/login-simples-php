@@ -1,53 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 * {
-    margin: 0%;
-    padding: 0%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #6a11cb, #2575fc);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease;
 }
 
 .index {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.content input{
-    border: none;
-    padding: 10px ;
-    color: #1773e4;
-    font-size: 18px;
     width: 100%;
-    box-sizing: border-box;
+    max-width: 400px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    animation: slideIn 1.2s ease-out;
 }
-.cadastro{
-    background-color: #1773e4;
-    padding: 80px;
-    padding-top: 100px;
-    border-radius: 28px;    
-    box-shadow: 90px -18px rgb(133, 245, 245);
+
+.cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-label{
-    display: inline-block;
-    max-width: 100%;
+
+.cadastro h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.content input {
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #333;
+    transition: box-shadow 0.3s ease;
+}
+
+.content input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #86b9f7;
+}
+
+label {
+    font-weight: 600;
+    color: #d3e9ff;
+    font-size: 16px;
     margin-bottom: 5px;
-    font-weight: 700;
-    color: #86b9f7;
-    font-size: 20px;
-    box-sizing: border-box;
-    
 }
-img{
-    margin: 0 auto 15px;
-    display: block;
-    height: 80px;
-    max-height: 100%;
-}
-button{
+
+button {
+    margin-top: 10px;
     background-color: #22a887;
-    color: #eee;
+    color: white;
     border: none;
     border-radius: 10px;
-    padding: 10px;
-    margin-top: 5%;
-    width: 100%;
-    font-size: 20px;
-    line-height: 200%;
+    padding: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #1a8f73;
+    transform: translateY(-2px);
+}
+
+a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #c9e3ff;
+    text-decoration: underline;
+}
+
+img {
+    display: block;
+    margin: 0 auto 20px;
+    height: 80px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
