@@ -1,5 +1,5 @@
 <?php
-include('protect.php');
+include('../controller/protect.php');
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +86,7 @@ include('protect.php');
     <div class="painel">
         <h1>Bem-vindo ao Painel, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!</h1>
         <p>
-            <a href="logout.php">Sair</a>
+            <a href="../controller/LogoutController.php">Sair</a>
         </p>
     </div>
 

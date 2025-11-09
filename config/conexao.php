@@ -3,7 +3,7 @@
 class Conexao
 {
     public static $host = 'localhost';
-    public static $dbname = 'test';
+    public static $dbname = 'login_crud_melhorado';
     public static $user = 'root';
     public static $password = '';
 

@@ -5,4 +5,4 @@ if (!isset($_SESSION)) {
 }
 unset($_SESSION['logado']);
 unset($_SESSION['usuario']);
-header("Location: index.php");
+header("Location: ../view/index.php");
